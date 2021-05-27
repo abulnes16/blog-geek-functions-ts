@@ -4,6 +4,8 @@ Este proyecto pertenece al curso de Firebase Cloud Functions de <a href="https:/
 
 Recuerda para que correr el proyecto es necesario que crees uno en la consola de Firebase y habilites el <a href="https://firebase.google.com/pricing?authuser=0">plan Blaze</a> para poder hacer uso de las Cloud Functions. 
 
+**Importante:** En el archivo .firebaserc recuerda colocar el código clave de tu proyecto. 
+
 Luego instala las dependencias en la carpeta de functions con 
 
 ```cd functions && npm install```
