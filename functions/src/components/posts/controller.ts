@@ -54,11 +54,18 @@ function validateImage(image: ObjectMetadata) {
 
   const posts = new Posts();
   return posts.validarImagenPost(image)
-        .catch((error: Error) => console.error(`Error al validar imagen =>${error}`));
+    .catch((error: Error) => console.error(`Error al validar imagen =>${error}`));
 }
+
+function sendWeeklyPosts(topic: string) {
+  const post = new Posts();
+  return post.enviarPostSemana(topic);
+}
+
 
 export default {
   updatePost,
   auditPost,
   validateImage,
+  sendWeeklyPosts,
 }

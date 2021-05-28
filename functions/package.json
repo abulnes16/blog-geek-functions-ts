@@ -15,12 +15,16 @@
   "main": "lib/index.js",
   "dependencies": {
     "@google-cloud/vision": "^2.3.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
     "firebase-admin": "^9.2.0",
     "firebase-functions": "^3.11.0",
     "nodemailer": "^6.6.1",
     "request": "^2.88.2"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.10",
+    "@types/express": "^4.17.12",
     "@types/nodemailer": "^6.4.2",
     "@types/request": "^2.48.5",
     "@typescript-eslint/eslint-plugin": "^3.9.1",

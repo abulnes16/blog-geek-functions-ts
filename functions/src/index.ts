@@ -3,6 +3,7 @@ import userController from './components/users/controller';
 import tokenController from './components/notificatons/controller';
 import postController from './components/posts/controller';
 import { initializeApp } from 'firebase-admin';
+import API from './api';
 
 
 // // Start writing Firebase Functions
@@ -29,6 +30,10 @@ export const auditoryPosts = functions.firestore
   .document('/posts/{idPost}')
   .onUpdate(postController.auditPost);
 
+// Storage functions
 export const validateImage = functions.storage
   .object()
   .onFinalize(postController.validateImage);
+
+// HTTPS functions
+export const sendDailyPosts = functions.https.onRequest(API);

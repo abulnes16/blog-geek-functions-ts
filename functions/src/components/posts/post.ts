@@ -10,6 +10,8 @@ import { ObjectMetadata } from "firebase-functions/lib/providers/storage";
 import { ImageAnnotatorClient } from '@google-cloud/vision';
 import { join, basename } from 'path';
 import { tmpdir } from 'os';
+import { plantillaVideosLaSemana } from "../../utilities/EmailTemplates";
+import Email from "../../utilities/EmailHelper";
 
 class Posts {
   registrarAuditoria(idPost: string, nuevoPost: Post, viejoPost: Post) {
@@ -91,7 +93,38 @@ class Posts {
       });
   }
 
-  enviarPostSemana(topicoNotificacion: string) { };
+  enviarPostSemana(topicoNotificacion: string) {
+    const endDate = new Date();
+    const startDate = new Date();
+    startDate.setDate(endDate.getDate() - 5);
+    let userEmails = "";
+    return firestore()
+      .collection('emailsusuarios')
+      .get().then((emails) => {
+        emails.forEach((email) => {
+          userEmails += `${email.data().email}`
+        });
+        return userEmails;
+      }).then(() => {
+        return firestore().collection('posts')
+          .where('date', '>=', startDate)
+          .where('date', '<=', endDate)
+          .where('publish', '==', true)
+          .get();
+      }).then((posts) => {
+        if (!posts.empty) {
+          const textHTML = plantillaVideosLaSemana(posts);
+          const objEmail = new Email();
+          return objEmail.sendEmail(
+            'info@blogeek.co',
+            userEmails, '',
+            'Video Blogeek- Los videos blogeek de la seman',
+            textHTML
+          );
+        }
+        return null;
+      });
+  };
 }
 
 export default Posts;
