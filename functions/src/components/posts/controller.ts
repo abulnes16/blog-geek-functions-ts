@@ -16,8 +16,8 @@ import { Post } from "./types";
 function updatePost(dataSnapshot: Change<DocumentSnapshot>, context: EventContext) {
 
   const notifications = new Notificaciones();
-  const { publicado: prevPublish } = dataSnapshot.before.data()!;
-  const { publicado: postPublish, titulo, descripcion } = dataSnapshot.after.data()!;
+  const { publish: prevPublish } = dataSnapshot.before.data()!;
+  const { publish: postPublish, titulo, descripcion } = dataSnapshot.after.data()!;
 
   if (prevPublish === false && postPublish === true) {
     return notifications.enviarNotificacion(titulo, descripcion, '', null);

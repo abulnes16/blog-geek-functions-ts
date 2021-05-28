@@ -67,3 +67,4 @@ node_modules/
 .runtimeconfig.json
 service-account.json
 mock/
+credentials.json
