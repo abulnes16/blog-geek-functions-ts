@@ -102,7 +102,7 @@ class Posts {
       .collection('emailsusuarios')
       .get().then((emails) => {
         emails.forEach((email) => {
-          userEmails += `${email.data().email}`
+          userEmails += `${email.data().email},`;
         });
         return userEmails;
       }).then(() => {
@@ -118,7 +118,7 @@ class Posts {
           return objEmail.sendEmail(
             'info@blogeek.co',
             userEmails, '',
-            'Video Blogeek- Los videos blogeek de la seman',
+            'Video Blogeek- Los videos blogeek de la semana',
             textHTML
           );
         }

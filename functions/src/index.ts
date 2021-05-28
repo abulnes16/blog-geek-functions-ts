@@ -2,6 +2,7 @@ import * as functions from 'firebase-functions';
 import userController from './components/users/controller';
 import tokenController from './components/notificatons/controller';
 import postController from './components/posts/controller';
+import analyticsController from './components/analytics/controller';
 import { initializeApp } from 'firebase-admin';
 import API from './api';
 
@@ -37,3 +38,10 @@ export const validateImage = functions.storage
 
 // HTTPS functions
 export const sendDailyPosts = functions.https.onRequest(API);
+
+// Crashlytics no es soportado por firebase functions desde el 1ero de mayo del 2020
+
+// Analytics
+export const shareAnalytics = functions.analytics
+  .event('share')
+  .onLog(analyticsController.sendShareCoupon);
